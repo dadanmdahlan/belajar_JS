@@ -30,17 +30,115 @@
 
 //contructing promise object 
 
-const executorFunction = (resolve, reject) => {
-  const isCoffeeMakerReady=true;
-  if(isCoffeeMakerReady) {
-    resolve ("Kopi berhasil dibuat");
-  } else {
-    reject("Mesin kopi tidak bisa digunakan ");
-  }
+// const executorFunction = (resolve, reject) => {
+//   const isCoffeeMakerReady=true;
+//   if(isCoffeeMakerReady) {
+//     resolve ("Kopi berhasil dibuat");
+//   } else {
+//     reject("Mesin kopi tidak bisa digunakan ");
+//   }
+// }
+
+// const makeCoffee=()=> {
+//   return new Promise(executorFunction);
+// }
+// const coffeePromise =makeCoffee();
+// console.log(coffeePromise);
+
+// consuming promise
+
+// const myPromise = new Promise(executorFunction);
+// myPromise.then(onFullfi,onRejected);
+
+// const stock ={
+//   coffeBeans:10,
+//   water:10,
+// }
+// const checkStock=() =>{
+//   return new Promise ((resolve,reject)=> {
+//     if(stock.coffeBeans>=16 && stock.water>=250) {
+//       resolve("Stok Cukup . Bisa membuat kopu");
+//     } else {
+//       reject("stok tidak cukup");
+//     }
+//   });
+// };
+
+// const handleSuccess =resolvedValue => {
+//   console.log(resolvedValue);
+// }
+
+// const handleFailure = rejectionReason =>{
+//   console.log(rejectionReason);
+// }
+
+// checkStock().then(handleSuccess,handleFailure);
+// cara 2 on rejected with catch method 
+// checkStock()
+//     .then(handleSuccess)
+//     .catch(handleFailure);
+
+// chaining promise
+
+ // contoh
+ const state= {
+  stock:{
+    coffeeBeans: 250,
+    water: 1000,
+  },
+  isCoffeeMachineBussy:false,
 }
 
-const makeCoffee=()=> {
-  return new Promise(executorFunction);
-}
-const coffeePromise =makeCoffee();
-console.log(coffeePromise);
+    const checkAvailability=() =>{
+      return new Promise ((resolve,reject) =>{
+        setTimeout(()=>{
+          if(!state.isCoffeeMachineBussy){
+            resolve("Mesin kopi siap digunakan");
+          } else {
+            reject("Maaf mesin sedang sibuk .");
+          }
+        },1000);
+      });
+    };
+
+   
+    const checkStock=() =>{
+      return new Promise ((resolve,reject) =>{
+        state.isCoffeeMachineBussy=true;
+        setTimeout(()=>{
+          if(state.stock.coffeeBeans >=16 && state.stock.water >= 250){
+            resolve("stok cukup. Bisa membuat kopi.");
+          }else{
+            reject("stok tidak cukup ");
+          }
+        },1500);
+      });
+    };
+    
+    const brewCoffee = () =>{
+      console.log("Membuatkan kopi anda....")
+      return new Promise((resolve,reject) => {
+        setTimeout(()=>{
+          resolve("Kopi sudah siap!")
+        },2000);
+      });
+    };
+      
+    function makeEspresso() {
+      checkAvailability()
+          .then((value) =>{
+            console.log(value);
+            return checkStock();
+          })
+          .then((value)=> {
+            console.log(value)
+            return brewCoffee();
+          })
+          .then((value)=> {
+            console.log(value);
+          })
+          .catch((rejectedReason)=>{
+            console.log(rejectedReason);
+          });
+        }
+    makeEspresso();

@@ -1,144 +1,65 @@
-// console.log("selamat datang");
-// setTimeout(()=>{
-//   console.log("Terima kasih sudah mampir , silahkan datang kembali!");
-// },3000);
-// console.log("ada yang bisa dibantu?");
+// // contoh pertama
+// // function makeCoffee(){
+// //   const coffe = getCoffee(); //async process menggunakan promise
+// //   console.log(coffee);
 
-// const orderCoffee = () =>{
-//   let coffee= null;
-//   console.log("Sedang membuat kopi, Silahkan tunggu...");
-//   setTimeout(()=>{
-//     coffe= "Kopi sudah jadi!";
-//   },3000);
-//   return coffe;
+// // }
+// // tidak bisa seperti diatas melainkan harus seperti ini
+
+// //promise
+// // function makeCoffee(){
+// //   getCoffee().then(coffee=>{
+// //     console.log(coffee);
+// //   });
+// // }
+
+// // //callback 
+// //   function makeCoffee(){
+// //     getCoffee(function(coffee){
+// //       console.log(coffee);
+// //     });
+// //   }
+// // makeCoffee();
+
+// // namus sejak ES 8(ESCMAScript 2017) ada firut async/await
+
+// // contoh penggunaan async/await
+
+// const getCoffee=()=>{
+//   return new Promise ((resolve,reject) =>{
+//     const seeds =0;
+//     setTimeout(()=>{
+//       if(seeds>=10){
+//         resolve("kopi didapatkan!");
+//       }else{
+//         reject("Biji kopi habis");
+//       }
+//     },1000);
+//   })
 // }
-// const coffee =orderCoffee();
-// console.log(coffee);
-
-// cara callback
-// const orderCoffee =callback=> {
-//   let coffee = null;
-//   console.log("sedang membuat kopi silahkan tunggu.... ");
-//   setTimeout(()=>{
-//     coffee = "Kopi sudah jadi";
-//     callback(coffee);
-//   },3000);
-// }
-// orderCoffee(coffee => {
-//   console.log(coffee);
-// });
-
-//contructing promise object 
-
-// const executorFunction = (resolve, reject) => {
-//   const isCoffeeMakerReady=true;
-//   if(isCoffeeMakerReady) {
-//     resolve ("Kopi berhasil dibuat");
-//   } else {
-//     reject("Mesin kopi tidak bisa digunakan ");
+// // handle onRejected using async-await 
+// async function makeCoffee(){
+//   try {
+//     const coffee = await getCoffee(); //async process menggunakan promise
+//     console.log(coffee);
+//   } catch (rejectedReason) {
+//     console.log(rejectedReason);
 //   }
+ 
+
 // }
+// makeCoffee();
 
-// const makeCoffee=()=> {
-//   return new Promise(executorFunction);
-// }
-// const coffeePromise =makeCoffee();
-// console.log(coffeePromise);
-
-// consuming promise
-
-// const myPromise = new Promise(executorFunction);
-// myPromise.then(onFullfi,onRejected);
-
-// const stock ={
-//   coffeBeans:10,
-//   water:10,
-// }
-// const checkStock=() =>{
-//   return new Promise ((resolve,reject)=> {
-//     if(stock.coffeBeans>=16 && stock.water>=250) {
-//       resolve("Stok Cukup . Bisa membuat kopu");
-//     } else {
-//       reject("stok tidak cukup");
-//     }
-//   });
-// };
-
-// const handleSuccess =resolvedValue => {
-//   console.log(resolvedValue);
-// }
-
-// const handleFailure = rejectionReason =>{
-//   console.log(rejectionReason);
-// }
-
-// checkStock().then(handleSuccess,handleFailure);
-// cara 2 on rejected with catch method 
-// checkStock()
-//     .then(handleSuccess)
-//     .catch(handleFailure);
-
-// chaining promise
-
- // contoh
- const state= {
-  stock:{
-    coffeeBeans: 250,
-    water: 1000,
-  },
-  isCoffeeMachineBussy:false,
+function fetchUsername() {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          resolve('JSUser');
+      }, 3000);
+  })
 }
 
-    const checkAvailability=() =>{
-      return new Promise ((resolve,reject) =>{
-        setTimeout(()=>{
-          if(!state.isCoffeeMachineBussy){
-            resolve("Mesin kopi siap digunakan");
-          } else {
-            reject("Maaf mesin sedang sibuk .");
-          }
-        },1000);
-      });
-    };
-
-   
-    const checkStock=() =>{
-      return new Promise ((resolve,reject) =>{
-        state.isCoffeeMachineBussy=true;
-        setTimeout(()=>{
-          if(state.stock.coffeeBeans >=16 && state.stock.water >= 250){
-            resolve("stok cukup. Bisa membuat kopi.");
-          }else{
-            reject("stok tidak cukup ");
-          }
-        },1500);
-      });
-    };
-    
-    const brewCoffee = () =>{
-      console.log("Membuatkan kopi anda....")
-      return new Promise((resolve,reject) => {
-        setTimeout(()=>{
-          resolve("Kopi sudah siap!")
-        },2000);
-      });
-    };
-      
-    function makeEspresso() {
-      checkAvailability()
-          .then((value) =>{
-            console.log(value);
-            return checkStock();
-          })
-          .then((value)=> {
-            console.log(value)
-            return brewCoffee();
-          })
-          .then((value)=> {
-            console.log(value);
-          })
-          .catch((rejectedReason)=>{
-            console.log(rejectedReason);
-          });
-        }
-    makeEspresso();
+console.log("Fetching username...");
+fetchUsername().then((value) => {
+    console.log(`You are logged in as ${value}`);
+})
+console.log("Welcome!");

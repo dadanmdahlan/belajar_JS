@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1620610444853" clover="3.2.0">
+  <project timestamp="1620610444853" name="All files">
+    <metrics statements="14" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3" elements="22" coveredelements="11" complexity="0" loc="14" ncloc="14" packages="1" files="1" classes="1"/>
+    <file name="gradeCalculation.js" path="C:\xampp\htdocs\belajar JS\dicoding\latihanjs\gradeCalculation.js">
+      <metrics statements="14" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="4" type="stmt"/>
+      <line num="3" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="4" count="4" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="0" type="stmt"/>
+      <line num="10" count="0" type="stmt"/>
+      <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="14" count="0" type="stmt"/>
+      <line num="16" count="0" type="stmt"/>
+      <line num="17" count="0" type="stmt"/>
+      <line num="21" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
